@@ -1,5 +1,6 @@
 
 using EF_5.Repository;
+using EF_5.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF_5
@@ -20,6 +21,9 @@ namespace EF_5
             });
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            
+            // Service-Injected
+            builder.Services.AddScoped<AutherService>();
 
             var app = builder.Build();
 

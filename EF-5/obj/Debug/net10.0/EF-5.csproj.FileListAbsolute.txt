@@ -148,6 +148,7 @@ C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\EF-5.AssemblyInfo.cs
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\EF-5.csproj.CoreCompileInputs.cache
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\EF-5.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\EF-5.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\EF-5.sourcelink.json
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\shiva\source\repos\Authors\EF-5\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json

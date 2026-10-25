@@ -1,8 +1,8 @@
 ﻿using EF_5.Model;
 using EF_5.Repository;
-using Microsoft.AspNetCore.Mvc;
+using EF_5.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EF_5.Controllers
 {
@@ -10,10 +10,10 @@ namespace EF_5.Controllers
     [ApiController]
     public class AuthorController : Controller
     {
-        private readonly AuthorsDB _authors;
-        public AuthorController(AuthorsDB authors)
+        private readonly AutherService _service;
+        public AuthorController(AutherService authorsService)
         {
-            _authors = authors;
+            _service = authorsService;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace EF_5.Controllers
         {
             try
             {
-                var authorData = await _authors.AuthorsTable.ToListAsync();
+                var authorData = await _service.GetAuthors();
                 return Ok(authorData);
             }
             catch (Exception ex)
@@ -36,9 +36,8 @@ namespace EF_5.Controllers
         {
             try
             {
-                _authors.AuthorsTable.Add(entity);
-                await _authors.SaveChangesAsync();
-                return Ok(entity);
+                var result = await _service.AddAuthor(entity);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -51,14 +50,8 @@ namespace EF_5.Controllers
         {
             try
             {
-                var entity = await _authors.AuthorsTable.FindAsync(id);
-                if (entity == null)
-                {
-                    return NotFound("Author not found");
-                }
-                _authors.AuthorsTable.Remove(entity);
-                await _authors.SaveChangesAsync();
-                return Ok("Author deleted successfully");
+                var result = await _service.DeleteAuthor(id);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -71,25 +64,13 @@ namespace EF_5.Controllers
         {
             try
             {
-                var existingAuthors = await _authors.AuthorsTable.FindAsync(entity.AuthorId);
-                if(existingAuthors == null)
-                {
-                    return NotFound("Author not found");
-                }
-                existingAuthors.AuthorId = entity.AuthorId;
-                existingAuthors.Author_Name = entity.Author_Name;
-                existingAuthors.Author_Age = entity.Author_Age;
-                existingAuthors.Author_EXP = entity.Author_EXP;
-
-                _authors.AuthorsTable.Update(existingAuthors);
-                await _authors.SaveChangesAsync();
-                return Ok("Data updated successfully");
+                var result = await _service.UpdateAuthor(entity);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }
